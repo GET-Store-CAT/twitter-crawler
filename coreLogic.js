@@ -16,7 +16,7 @@ class CoreLogic {
 
     // the following function starts the crawler if not already started, or otherwise fetches a submission CID for a particular round
     let round = await namespaceWrapper.getRound();
-    if ( !this.twitterTask || !this.twitterTask.isRunning ) {
+    if ( !this.twitterTask || !this.twitterTask.isRunning ) { // TODO - could be causing memory leaks
       try {
         this.twitterTask = await new TwitterTask (namespaceWrapper.getRound, round);
         console.log('started a new crawler at round', round);

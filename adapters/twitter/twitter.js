@@ -20,7 +20,7 @@ class Twitter extends Adapter {
     super(credentials, maxRetry);
     this.credentials = credentials;
     this.db = new Data('db', []);
-    this.db.initializeData();
+    this.db.initializeData(); // TODO - could be a memory leak
     this.proofs = new Data('proofs', []);
     this.proofs.initializeData();
     this.cids = new Data('cids', []);
@@ -66,7 +66,7 @@ class Twitter extends Adapter {
     const options = {};
     const stats = await PCR(options);
 
-    this.browser = await stats.puppeteer.launch({ 
+    this.browser = await stats.puppeteer.launch({  // TODO - could be a memory leak
       headless: 'new',
       executablePath: stats.executablePath 
     });
@@ -142,6 +142,8 @@ class Twitter extends Adapter {
 
     this.sessionValid = true;
     this.lastSessionCheck = Date.now();
+
+    
 
     console.log('Step: Login successful');
 
